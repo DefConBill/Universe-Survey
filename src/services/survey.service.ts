@@ -30,6 +30,6 @@ export class SurveyService {
       }
     });
     const result = new Result(survey.name, survey.job, survey.personal, survey.feedback, this.answerResults);
-    this.http.post<{ success: boolean, data: any }>('https://api.hottubuniverse.ca/api/v1/items', result).subscribe();
+    this.http.post<{ success: boolean, data: any }>('https://api.hottubuniverse.ca/api/v1/auth/survey', result).subscribe();
   }
 }
