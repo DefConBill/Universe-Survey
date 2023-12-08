@@ -1,0 +1,114 @@
+<div class="p-10">
+  <p class="text-primary text-right font-extrabold text-6xl mr-10">POLYAS</p>
+  <hr class="h-1 my-8 bg-secondary border-0">
+
+  <div class="grid grid-cols-8 border border-lg border-primary">
+    <div class="border border-lg border-primary col-span-3 text-primary font-bold text-xl p-3">Please evaluate the following statements by marking the box which corresponds to your opinion</div>
+    <div class="border border-lg border-primary text-primary font-bold text-xl p-3 text-center">Strongly Agree</div>
+    <div class="border border-lg border-primary text-primary font-bold text-xl p-3 text-center">Somewhat Agree</div>
+    <div class="border border-lg border-primary text-primary font-bold text-xl p-3 text-center">Neither Agree or Disagree</div>
+    <div class="border border-lg border-primary text-primary font-bold text-xl p-3 text-center">Somewhat Disagree</div>
+    <div class="border border-lg border-primary text-primary font-bold text-xl p-3 text-center">Strongly Disagree</div>
+  </div>
+  <div *ngFor="let question of questions ;let i = index">
+    <div *ngIf="question.heading" class="w-full px-5 py-10 bg-primary text-white text-2xl font-bold">{{ question.question }}</div>
+    <div *ngIf="!question.heading">
+        <div class="grid grid-cols-8 border border-lg border-primary">
+        <div class="border border-lg border-primary col-span-3 text-primary font-bold text-xl p-3">{{ question.question }}</div>
+        <div class="border border-lg border-primary text-primary font-bold text-xl p-3 pt-6 text-center">
+          <button type="button" (click)="changeSelection(i,1)" [ngClass]="questions[i].answers.strongA ? 'bg-primary' : 'bg-gray-100'" class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-primary transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary" role="switch" aria-checked="false">
+            <span aria-hidden="true" [ngClass]="questions[i].answers.strongA ? 'translate-x-5' : 'translate-x-0'" class="translate-x-0 pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"></span>
+          </button>
+        </div>
+        <div class="border border-lg border-primary text-primary font-bold text-xl p-3 pt-6 text-center">
+          <button type="button" (click)="changeSelection(i,2)" [ngClass]="questions[i].answers.someA ? 'bg-primary' : 'bg-gray-100'" class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-primary transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary" role="switch" aria-checked="false">
+            <span aria-hidden="true" [ngClass]="questions[i].answers.someA ? 'translate-x-5' : 'translate-x-0'" class="translate-x-0 pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"></span>
+          </button>
+        </div>
+        <div class="border border-lg border-primary text-primary font-bold text-xl p-3 pt-6 text-center">
+          <button type="button" (click)="changeSelection(i,3)" [ngClass]="questions[i].answers.neutral ? 'bg-primary' : 'bg-gray-100'" class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-primary transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary" role="switch" aria-checked="false">
+            <span aria-hidden="true" [ngClass]="questions[i].answers.neutral ? 'translate-x-5' : 'translate-x-0'" class="translate-x-0 pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"></span>
+          </button>
+        </div>
+        <div class="border border-lg border-primary text-primary font-bold text-xl p-3 pt-6 text-center">
+          <button type="button" (click)="changeSelection(i,4)" [ngClass]="questions[i].answers.someD ? 'bg-primary' : 'bg-gray-100'" class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-primary transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary" role="switch" aria-checked="false">
+            <span aria-hidden="true" [ngClass]="questions[i].answers.someD ? 'translate-x-5' : 'translate-x-0'" class="translate-x-0 pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"></span>
+          </button>
+        </div>
+        <div class="border border-lg border-primary text-primary font-bold text-xl p-3 pt-6 text-center">
+          <button type="button" (click)="changeSelection(i,5)" [ngClass]="questions[i].answers.strongD ? 'bg-primary' : 'bg-gray-100'" class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-primary transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary" role="switch" aria-checked="false">
+            <span aria-hidden="true" [ngClass]="questions[i].answers.strongD ? 'translate-x-5' : 'translate-x-0'" class="translate-x-0 pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <form [formGroup]="surveyForm" (submit)="submit()">
+    <div class="w-full px-5 py-5 bg-primary text-white text-2xl font-bold">Please use the space below to outline your job duties, break them down into daily, weekly, bi-weekly, or monthly. Give an indication of the amount of time each task requires. Keep it brief, there is no need to account for every minute.</div>
+    <div>
+      <div class="border-2 border-primary p-5">
+        <div class="mt-2">
+          <textarea rows="12" name="job" id="job" formControlName="job" class="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="w-full px-5 py-5 bg-primary text-white text-2xl font-bold">Answer the following questions in the space below. Why do you believe you are the right person for your job? List your strengths and weaknesses. Are you an asset or a liability to the company and why? In what areas of your job do you think there is room for improvement? Where do you think you thrive?</div>
+    <div>
+      <div class="border-2 border-primary p-5">
+        <div class="mt-2">
+          <textarea rows="12" name="personal" id="personal" formControlName="personal" class="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="w-full px-5 py-5 bg-primary text-white text-2xl font-bold">Please provide any other feedback you think is pertinent. Feel free to include any suggestions.</div>
+    <div>
+      <div class="border-2 border-primary p-5">
+        <div class="mt-2">
+          <textarea rows="12" name="feedback" id="feedback" formControlName="feedback" class="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="surveyError" class="w-full px-5 py-5 text-center text-red-500 text-2xl font-bold">Please select one response for every agree/disagree question in the survey</div>
+    <div *ngIf="jobError" class="w-full px-5 py-5 text-center text-red-500 text-2xl font-bold">Please provide information on your job duties and time required</div>
+    <div *ngIf="personalError" class="w-full px-5 py-5 text-center text-red-500 text-2xl font-bold">Please list your strengths and weaknesses</div>
+    <div class="flex justify-end mt-10">
+      <button type="submit"class="bg-primary text-white font-bold py-2 px-4 rounded-full">Submit</button>
+    </div>
+  </form>
+</div>
+<div class="bg-black/50 white text fixed left-0 top-32 md:top-0 min-h-full min-w-full md:flex md:justify-center md:items-center" *ngIf="isModalOpen">
+  <div class="bg-gray-200 rounded-lg md:w-3/4 md:mx-auto">
+    <div class="flex justify-between items-center px-5 py-3">
+      <p class="text-xl font-bold text-primary mx-5">Hot Tub Universe Employee Survey</p>
+      <button type="button" (click)="closeModal()" class="text-gray-400 hover:text-gray-500 focus:outline-none">
+        <svg class="h-5 w-5" x-description="Heroicon name: x" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <path fill-rule="evenodd" d="M5.293 5.293a1 1 0 011.414 0L10 8.586l3.293-3.293a1 1 0 111.414 1.414L11.414 10l3.293 3.293a1 1 0 01-1.414 1.414L10 11.414l-3.293 3.293a1 1 0 01-1.414-1.414L8.586 10 5.293 6.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+        </svg>
+      </button>
+    </div>
+    <hr class="mx-10 h-1 mt-2 mb-2 bg-secondary border-0">
+    <div class="px-10 py-3">
+      <p class="text-gray-700 text-center py-2 mb-2 font-bold">Please note that this survey must be completed on a desktop computer!</p>
+      <p class="text-gray-700 text-center py-1">This employee survey has been commissioned by your employer through BDC as part of a larger analysis of the business.</p>
+      <p class="text-gray-700 text-center py-1">Your answers are completely confidential and your name, position and answers are not tracked or shared</p>
+      <p class="text-gray-700 text-center py-1">either internally or with your employer.</p>
+      <p class="text-gray-700 text-center py-1">The information provided within this survey is used as part of a larger information gathering in order to provide</p>
+      <p class="text-gray-700 text-center py-1">your employer with a report on the health of the business and actions that can be taken to improve both the</p>
+      <p class="text-gray-700 text-center py-1">health of the business as well as the happiness and well-being of the employees.</p>
+      <p class="text-gray-700 text-center py-1">Please complete all questions. The survey should take 20-30 minutes to complete</p>
+      <div class="flex justify-center my-10">
+        <button type="button" (click)="closeModal()" class="bg-primary text-white font-bold py-2 px-4 rounded-full">Get Started</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="bg-black/50 white text fixed left-0 top-32 md:top-0 min-h-full min-w-full md:flex md:justify-center md:items-center" *ngIf="isDone">
+  <div class="bg-gray-200 rounded-lg md:w-3/4 md:mx-auto">
+    <hr class="mx-10 h-1 mt-2 mb-2 bg-secondary border-0">
+    <div class="px-10 py-3">
+      <p class="text-gray-700 text-center py-1">Thank you!</p>
+      <p class="text-gray-700 text-center py-1">Your survey has been submitted. You may now close this window.</p>
+    </div>
+    <hr class="mx-10 h-1 mt-2 mb-2 bg-secondary border-0">
+  </div>
+</div>
