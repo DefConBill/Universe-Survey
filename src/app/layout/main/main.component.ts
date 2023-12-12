@@ -104,7 +104,7 @@ export class MainComponent implements OnInit {
     this.questions.push(new Question('I would recommend the company as an employer', false, new Answer(false, false, false, false, false)));
     this.questions.push(new Question('I would apply to the company again today if I had to decide', false, new Answer(false, false, false, false, false)));
     this.questions.push(new Question('I enjoy engaging with the company', false, new Answer(false, false, false, false, false)));
-    this.questions.push(new Question('I see myself still working at the compa- ny in five years', false, new Answer(false, false, false, false, false)));
+    this.questions.push(new Question('I see myself still working at the company in five years', false, new Answer(false, false, false, false, false)));
   }
 
   changeSelection(index: number, value: number) {

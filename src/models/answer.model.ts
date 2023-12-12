@@ -39,6 +39,7 @@ export class Result {
     public job: string,
     public personal: string,
     public feedback: string,
-    public answers: AnswerResult[]
+    public answers: AnswerResult[],
+    public _id?: string
   ) { }
 }

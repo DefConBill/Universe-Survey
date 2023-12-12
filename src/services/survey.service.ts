@@ -9,6 +9,10 @@ export class SurveyService {
   answerResults: AnswerResult[] = [];
   constructor(private http: HttpClient) { }
 
+  getSurveys() {
+    return this.http.get<{ success: boolean, data: any }>('https://api.hottubuniverse.ca/api/v1/auth/survey');
+  }
+
   sendSurvey(survey: Survey) {
     survey.questions.forEach(question => {
       if (!question.heading) {
